@@ -68,3 +68,30 @@
     
 })(jQuery);
 
+document.getElementById("sendMessageButton").addEventListener("click", function (event) {
+    event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+    // Obtén los valores de los campos del formulario
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    // Verifica que los campos estén completos
+    if (!name || !email || !subject || !message) {
+        alert("Por favor, completa todos los campos antes de enviar el mensaje.");
+        return;
+    }
+
+    // Construye el mensaje de WhatsApp
+    const whatsappMessage = `Hola, mi nombre es ${name} ${email}. Mi email es ${subject}. \nMensaje: ${message}`;
+
+    // Número de WhatsApp al que deseas enviar el mensaje (cambia el número por el tuyo)
+    const phoneNumber = "5491123456789"; // Reemplaza con el número de WhatsApp en formato internacional
+
+    // Genera la URL para WhatsApp
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+    // Abre WhatsApp en una nueva pestaña
+    window.open(whatsappURL, "_blank");
+});
